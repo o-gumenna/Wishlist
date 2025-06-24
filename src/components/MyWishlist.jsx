@@ -25,7 +25,7 @@ const MyWishlist = () => {
 
   return (
     <section className="container py-5">
-      <h2 className="mb-4 text-center text-primary">🎁 My Wishlist</h2>
+      <h2 className="mb-4 text-center text-white">My Wishlist</h2>
 
       <div className="row g-4">
         {wishlist.map((item) => (
@@ -41,7 +41,7 @@ const MyWishlist = () => {
         {/* Card: Add New Wish */}
         <div className="col-md-4">
           <div
-            className="border rounded shadow-sm h-100 d-flex flex-column align-items-center justify-content-center text-success bg-light text-center py-4"
+            className="h-100 d-flex flex-column justify-content-center align-items-center text-center"
             style={{ cursor: "pointer", minHeight: "250px" }}
             onClick={() => setShowModal(true)}
           >

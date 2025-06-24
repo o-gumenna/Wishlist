@@ -8,24 +8,19 @@ const Header = ({ onLoginClick, onAddWish }) => {
       <nav className="navbar navbar-expand-lg header-bg border-bottom px-3">
         <div className="container-fluid">
           
-          {/* Назва сайту */}
           <Link href="/" className="navbar-brand site-logo">
             WishForest
           </Link>
 
-          {/* Кнопки праворуч */}
           <div className="d-flex align-items-center gap-3 ms-auto">
 
-            {/* My Wishlist */}
-            <Link href="/my-wishlist" className="btn btn-outline-primary">
+            <Link href="/my-wishlist" className="btn border border-dark text-dark">
               My Wishlist
             </Link>
 
-            {/* Search */}
             <SearchDropdown onAddWish={onAddWish} />
 
-            {/* Login іконка */}
-            <button className="btn btn-outline-secondary " onClick={onLoginClick} > 
+            <button className="btn border border-dark text-dark" onClick={onLoginClick} > 
               <FaUser />
             </button>
 

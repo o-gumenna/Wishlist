@@ -41,7 +41,7 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
       isCustom: true
     };
 
-    onAddWish(newWish); // 🔁 Передаємо в батьківський компонент
+    onAddWish(newWish);
     resetForm();
     onClose();
   };
@@ -49,15 +49,15 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
   return (
     <Modal show={show} onHide={onClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>✨ Додати нове бажання</Modal.Title>
+        <Modal.Title>Add a new wish</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>Назва *</Form.Label>
+            <Form.Label>Name *</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Наприклад, Ноутбук Asus Zenbook"
+              placeholder="For example, Laptop Asus Zenbook"
               value={title}
               required
               onChange={(e) => setTitle(e.target.value)}
@@ -65,7 +65,7 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Зображення (URL)</Form.Label>
+            <Form.Label>Picture (URL)</Form.Label>
             <Form.Control
               type="url"
               placeholder="https://example.com/image.jpg"
@@ -75,18 +75,18 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Опис</Form.Label>
+            <Form.Label>Description</Form.Label>
             <Form.Control
               as="textarea"
               rows={2}
-              placeholder="Додаткові деталі, колір, розмір тощо"
+              placeholder="Additional information"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Посилання на сайт</Form.Label>
+            <Form.Label>Link</Form.Label>
             <Form.Control
               type="url"
               placeholder="https://example.com"
@@ -96,18 +96,18 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Ціна</Form.Label>
+            <Form.Label>Price</Form.Label>
             <Form.Control
               type="number"
-              placeholder="Наприклад, 4999"
+              placeholder="For example, 4999"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
           </Form.Group>
 
           <div className="d-grid">
-            <Button variant="success" type="submit">
-              💾 Зберегти бажання
+            <Button className="btn-wish" type="submit">
+              save a new wish
             </Button>
           </div>
         </Form>

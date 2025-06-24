@@ -31,18 +31,18 @@ const SearchDropdown = ({ onAddWish }) => {
       const updated = [...saved, gift];
       localStorage.setItem("wishlist", JSON.stringify(updated));
     }
-    console.log("Додано у вішліст:", gift.title);
+    console.log("Added to your wishlist:", gift.title);
   };
 
   return (
     <div className="dropdown">
       <button
-        className="btn btn-outline-secondary dropdown-toggle"
+        className="btn border border-dark text-dark dropdown-toggle"
         type="button"
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        🔍 Search
+        Recommendstions
       </button>
 
       <ul
@@ -60,14 +60,14 @@ const SearchDropdown = ({ onAddWish }) => {
                 variant="outline-primary"
                 onClick={() => handlePreview(gift)}
               >
-                Переглянути
+                Review
               </Button>
               <Button
                 size="sm"
                 variant="outline-success"
                 onClick={() => handleAdd(gift)}
               >
-                ➕
+                Add
               </Button>
             </div>
           </li>
@@ -77,14 +77,13 @@ const SearchDropdown = ({ onAddWish }) => {
           <li className="text-muted px-2">Немає доступних ідей</li>
         )}
 
-        {/* ➕ Add your own item */}
         <li className="border-top mt-3 pt-2">
           <div
-            className="d-flex justify-content-center text-success fw-semibold"
+            className="d-flex justify-content-center text-dark fw-semibold"
             role="button"
             onClick={onAddWish}
           >
-            ➕ Add your own item
+            Add your own item
           </div>
         </li>
       </ul>

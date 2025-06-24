@@ -2,25 +2,42 @@ import { useRef, useState } from "react";
 import Header from "../src/components/Header";
 import HeroSection from "../src/components/HeroSection";
 import RecommendationSection from "../src/components/RecommendationSection";
-import LoginForm from "../src/components/LoginForm";
+import LoginModal from "../src/components/LoginModal";
 import AddWishModal from "../src/components/AddWishModal";
 
 
 
+
 export default function HomePage() {
-  const loginRef = useRef(null);
   const [showModal, setShowModal] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   return (
     <>
       <Header
-        onLoginClick={() => loginRef.current?.scrollIntoView({ behavior: "smooth" })}
+        onLoginClick={() => setShowLogin(true)}
         onAddWish={() => setShowModal(true)}
       />
       <HeroSection onAddWish={() => setShowModal(true)} />
       <AddWishModal show={showModal} onClose={() => setShowModal(false)} />
       <RecommendationSection />
-      <LoginForm scrollRef={loginRef} />
+      <LoginModal show={showLogin} handleClose={() => setShowLogin(false)} />
+
+      <div className="text-center my-5">
+        <button
+          className="btn btn-outline-dark btn-wishlist-bottom"
+          onClick={() => {
+            const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+            if (!isLoggedIn) {
+              alert("Спочатку увійдіть у свій акаунт ✨");
+              return;
+            }
+            window.location.href = "/my-wishlist";
+          }}
+        >
+          go to my wishlist
+        </button>
+      </div>
     </>
   );
 }

@@ -1,8 +1,6 @@
-/* ---------- Основний стиль для всього проєкту ---------- */
-
 body {
   font-family: 'Comfortaa';
-  background-color: #babd92;
+  background-color: #7b7d5a;
   color: black;
   font-size: 16px;
   line-height: 1.6;
@@ -20,49 +18,66 @@ h1, h2, h3, h4 {
 
 /* Hero секція */
 .hero-section {
-  background-color: #babd92;
+  background-color: #7b7d5a;
   padding: 5rem 0;
 }
 
 /* Кнопки */
 .btn-success {
-  background-color: #3dbf5d;
+  background-color: black;
+  color: #f1eac6;
   border: none;
 }
 
+
 .btn-success:hover {
-  background-color: #33a94f;
+  background-color: #f1eac6;
+  color: #7b7d5a;
 }
 
 .btn-outline-primary {
-  border-color: #4b8371;
-  color: #4b8371;
+  border-color: #7b7d5a;
+  color: #7b7d5a;
 }
 
 .btn-outline-primary:hover {
-  background-color: #4b8371;
-  color: #fff;
+  background-color: #7b7d5a;
+  color: #f1eac6;
+  border: none;
 }
+
+.btn-outline-success {
+  border-color: black;
+  color: black;
+}
+
+.btn-outline-success:hover {
+  background-color: black;
+  color: #f1eac6;
+  border: none;
+}
+
+
 
 /* "Add New Wish" Card */
 .add-wish-card {
-  background-color: #f2fff3;
-  border: 2px dashed #a4d4af;
-  color: #3e9155;
+  background-color: #f1eac6;
+  border: 2px dashed #7b7d5a;
+  color: #7b7d5a;
   transition: all 0.2s ease-in-out;
 }
 
 .add-wish-card:hover {
-  background-color: #e3fbe7;
+  background-color: #f1eac6;
   transform: translateY(-3px);
 }
 
 .recommendation-section {
-  background-color: #babd92;
+  background-color: #7b7d5a;
 }
 
 .header-bg {
-  background-color: #f4e8d8 !important;
+  background-color: #f1eac6 !important;
 }
 
 .site-logo {
@@ -75,9 +90,48 @@ h1, h2, h3, h4 {
 }
 
 .login-page {
-  background-color: #babd92; /* або точний твій зелений */
+  background-color: #7b7d5a;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.custom-card {
+  border: none;
+}
+
+.btn-wish {
+  background-color: white;
+  color: #7b7d5a;
+  border: 1px solid #7b7d5a;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.btn-wish:hover {
+  background-color: #7b7d5a;
+  color: white;
+  border: none;
+}
+
+.btn-wishlist-bottom {
+  background-color: #f1eac6;
+  color: bl;
+  border: black;
+  border-radius: 20px;
+  padding: 0.5rem 0.5rem;
+  font-size: 2rem;              
+  max-width: 400px;          
+  width: 100%;           
+  margin: 0 auto; 
+}
+
+
+.btn-wishlist-bottom:hover {
+  background-color: #1d1d1d;
+  color: #fff;
+  transition: 0.3s ease;
 }

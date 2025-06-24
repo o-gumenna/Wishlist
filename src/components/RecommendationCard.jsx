@@ -23,7 +23,7 @@ const RecommendationCard = ({ gift, isPersonal = false, onRemove }) => {
 
   return (
     <>
-      <div className="card h-100 shadow-sm" role="button" onClick={openModal}>
+      <div className="card h-100 shadow-sm custom-card" role="button" onClick={openModal}>
         <Image
           src={gift.image}
           alt={gift.title}
@@ -41,7 +41,7 @@ const RecommendationCard = ({ gift, isPersonal = false, onRemove }) => {
               className="mt-auto"
               onClick={onRemove}
             >
-              🗑 Видалити з мого вішліста
+              Видалити з мого вішліста
             </Button>
           ) : (
             <Button
@@ -77,15 +77,15 @@ const RecommendationCard = ({ gift, isPersonal = false, onRemove }) => {
                 rel="noopener noreferrer"
                 className="btn btn-outline-primary w-100"
               >
-                Перейти на сайт
+                Link
               </a>
             </div>
           )}
         </Modal.Body>
 
         {!isPersonal && (
-          <Modal.Footer>
-            <Button variant="primary" onClick={handleAddToWishlist}>
+          <Modal.Footer className="justify-content-center">
+            <Button variant="outline-dark" onClick={handleAddToWishlist}>
               Add to Wishlist
             </Button>
           </Modal.Footer>

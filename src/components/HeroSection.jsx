@@ -24,7 +24,7 @@ const HeroSection = ({ onAddWish }) => {
 
               {/* Підзаголовок і кнопка */}
               <div>
-                <p className="fs-2 text-muted mb-4 text-start">
+                <p className="fs-2 mb-4">
                   Dream, look for, save and make<br />your wish come true
                 </p>
                 <Button
@@ -33,13 +33,13 @@ const HeroSection = ({ onAddWish }) => {
                   onClick={() => {
                     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
                     if (!isLoggedIn) {
-                      alert("Спочатку увійди, щоб додати бажання ✨");
+                      alert("Login to save a wish");
                       return;
                     }
                     onAddWish();
                   }}
                 >
-                  Save a New Wish
+                  save a new wish
                 </Button>
               </div>
 

@@ -17,7 +17,7 @@ const RecommendationSection = () => {
       const randomThree = getRandomSubset(data, 3);
       setVisibleGifts(randomThree);
     } catch (err) {
-      console.error("❌ Error fetching gifts:", err);
+      console.error("Error fetching gifts:", err);
     }
   };
 
@@ -34,7 +34,7 @@ const RecommendationSection = () => {
   return (
     <section className="py-5 recommendation-section">
       <div className="container">
-        <h2 className="mb-4 text-center">Gift Ideas for You</h2>
+        <h2 className="mb-4 text-center text-white">Gift Ideas for You</h2>
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {visibleGifts.map((gift) => (
             <div key={gift.id} className="col">
