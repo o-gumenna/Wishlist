@@ -1,0 +1,83 @@
+/* ---------- Основний стиль для всього проєкту ---------- */
+
+body {
+  font-family: 'Comfortaa';
+  background-color: #babd92;
+  color: black;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Заголовки — декоративний шрифт */
+h1, h2, h3, h4 {
+  font-family: 'Josefin Sans', sans-serif;
+  color: black;
+  letter-spacing: 0.5px;
+}
+
+/* Hero секція */
+.hero-section {
+  background-color: #babd92;
+  padding: 5rem 0;
+}
+
+/* Кнопки */
+.btn-success {
+  background-color: #3dbf5d;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #33a94f;
+}
+
+.btn-outline-primary {
+  border-color: #4b8371;
+  color: #4b8371;
+}
+
+.btn-outline-primary:hover {
+  background-color: #4b8371;
+  color: #fff;
+}
+
+/* "Add New Wish" Card */
+.add-wish-card {
+  background-color: #f2fff3;
+  border: 2px dashed #a4d4af;
+  color: #3e9155;
+  transition: all 0.2s ease-in-out;
+}
+
+.add-wish-card:hover {
+  background-color: #e3fbe7;
+  transform: translateY(-3px);
+}
+
+.recommendation-section {
+  background-color: #babd92;
+}
+
+.header-bg {
+  background-color: #f4e8d8 !important;
+}
+
+.site-logo {
+  font-family: 'Lobster', cursive;
+  color: #000;
+  font-size: 3rem;
+  line-height: 1.5;           
+  padding-top: 0.1rem;    
+  padding-bottom: 0.1rem;
+}
+
+.login-page {
+  background-color: #babd92; /* або точний твій зелений */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
