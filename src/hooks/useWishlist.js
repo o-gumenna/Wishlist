@@ -26,3 +26,4 @@ export default function useWishlist() {
 
   return { addWish, removeWish, loadWishes, exists };
 }
+

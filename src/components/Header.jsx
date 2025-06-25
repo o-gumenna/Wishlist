@@ -2,13 +2,12 @@ import Link from "next/link";
 import { FaUser } from "react-icons/fa";
 import SearchDropdown from "./SearchDropdown";
 
-
-const Header = ({ onLoginClick, onAddWish }) => {
+const Header = ({ onLoginClick, onAddWish, onUpdate }) => {
   return (
     <header>
       <nav className="navbar navbar-expand-lg header-bg border-bottom px-3">
         <div className="container-fluid">
-          
+
           <Link href="/" className="navbar-brand site-logo pulse-hover">
             WishForest
           </Link>
@@ -19,9 +18,12 @@ const Header = ({ onLoginClick, onAddWish }) => {
               My Wishlist
             </Link>
 
-            <SearchDropdown onAddWish={onAddWish} />
+            <SearchDropdown
+              onAddOwnWish={onAddWish}
+              onUpdate={onUpdate}
+            />
 
-            <button className="btn border border-dark text-dark pulse-hover" onClick={onLoginClick} > 
+            <button className="btn border border-dark text-dark pulse-hover" onClick={onLoginClick}>
               <FaUser />
             </button>
 

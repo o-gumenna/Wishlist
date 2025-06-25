@@ -5,10 +5,8 @@ import useWishlist from "../hooks/useWishlist";
 import { notifyAdded, notifyExists, notifyLoginRequired } from "../hooks/toastUtils";
 import { isLoggedIn } from "../hooks/auth";
 
-
-const SearchDropdown = ({ onAddWish }) => {
+const SearchDropdown = ({ onAddOwnWish, onUpdate }) => {
   const [items, setItems] = useState([]);
-  const [show, setShow] = useState(false);
   const [selectedGift, setSelectedGift] = useState(null);
   const { addWish, exists } = useWishlist();
 
@@ -24,18 +22,19 @@ const SearchDropdown = ({ onAddWish }) => {
 
   const handleAdd = (gift) => {
     if (!isLoggedIn()) {
-    notifyLoginRequired();
-    return;
-  }
+      notifyLoginRequired();
+      return;
+    }
 
     if (!exists(gift)) {
       addWish(gift);
       notifyAdded();
+      if (typeof onUpdate === "function") {
+        onUpdate(); // ✅ оновлюємо список побажань
+      }
     } else {
       notifyExists();
     }
-
-    notifyAdded;
   };
 
   return (
@@ -85,7 +84,7 @@ const SearchDropdown = ({ onAddWish }) => {
           <div
             className="d-flex justify-content-center text-dark fw-semibold"
             role="button"
-            onClick={onAddWish}
+            onClick={onAddOwnWish} // ✅ відкриває модальне вікно вручну
           >
             Add your own item
           </div>
@@ -94,14 +93,13 @@ const SearchDropdown = ({ onAddWish }) => {
 
       {selectedGift && (
         <RecommendationCard
-          key={selectedGift.id} // 🔥 ВАЖЛИВО
+          key={selectedGift.id}
           gift={selectedGift}
           autoOpen
           onAdd={() => setSelectedGift(null)}
           onRemove={() => setSelectedGift(null)}
         />
       )}
-
     </div>
   );
 };

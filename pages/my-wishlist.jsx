@@ -8,6 +8,7 @@ import { notifyLoginRequired } from "../src/hooks/toastUtils";
 
 
 
+
 const MyWishlistPage = () => {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
@@ -41,6 +42,7 @@ const MyWishlistPage = () => {
       <Header
         onLoginClick={() => setShowLogin(true)}
         onAddWish={() => setShowModal(true)}
+        onUpdate={loadWishes}
       />
 
       <MyWishlist wishes={wishes} onUpdate={loadWishes} />

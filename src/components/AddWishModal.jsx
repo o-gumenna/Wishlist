@@ -5,11 +5,10 @@ import useWishlist from "../hooks/useWishlist";
 import { notifyLoginRequired, notifyFormError, notifyAdded } from "../hooks/toastUtils";
 import { isLoggedIn } from "../hooks/auth";
 
-
-
 const AddWishModal = ({ show, onClose, onAddWish }) => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
+  const [fileName, setFileName] = useState("No file chosen");
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
   const [price, setPrice] = useState("");
@@ -19,6 +18,7 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
   const resetForm = () => {
     setTitle("");
     setImage("");
+    setFileName("No file chosen");
     setDescription("");
     setLink("");
     setPrice("");
@@ -47,8 +47,8 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
       isCustom: true
     };
 
-    addWish(newWish);  
-    notifyAdded();      
+    addWish(newWish);
+    notifyAdded();
 
     if (typeof onAddWish === "function") {
       onAddWish(newWish);
@@ -56,6 +56,18 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
 
     resetForm();
     onClose();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFileName(file.name);
+      const previewUrl = URL.createObjectURL(file);
+      setImage(previewUrl);
+    } else {
+      setFileName("No file chosen");
+      setImage("");
+    }
   };
 
   return (
@@ -77,14 +89,31 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Picture (URL)</Form.Label>
-            <Form.Control
-              type="url"
-              placeholder="https://example.com/image.jpg"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            />
+            <Form.Label>Picture</Form.Label>
+            <div className="d-flex align-items-center">
+              <label htmlFor="customFileUpload" className="btn btn-outline-primary me-3 mb-0">
+                Choose file
+              </label>
+              <span className="text-muted">{fileName}</span>
+              <Form.Control
+                type="file"
+                id="customFileUpload"
+                accept="image/*"
+                onChange={handleFileChange}
+                style={{ display: "none" }}
+              />
+            </div>
           </Form.Group>
+
+          {image && (
+            <div className="mb-3 text-center">
+              <img
+                src={image}
+                alt="Preview"
+                style={{ maxWidth: "100%", height: "auto", borderRadius: 8 }}
+              />
+            </div>
+          )}
 
           <Form.Group className="mb-3">
             <Form.Label>Description</Form.Label>
