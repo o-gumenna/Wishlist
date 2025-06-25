@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <>
       <button
-        className="btn btn-outline-secondary"
+        variant="outline-primary"
         onClick={() => setShowLogin(true)}
       >
         Login

@@ -1,12 +1,3 @@
-import Header from "./Header";
-import AddWishModal from "./AddWishModal";
-import LoginModal from "./LoginModal";
-import SearchDropdown from "./SearchDropdown";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { notifyLoginRequired } from "../hooks/toastUtils";
-import { isLoggedIn } from "../hooks/auth";
-
 import RecommendationCard from "./RecommendationCard";
 
 const MyWishlist = ({ wishes, onUpdate }) => {
@@ -27,12 +18,11 @@ const MyWishlist = ({ wishes, onUpdate }) => {
               gift={item}
               isPersonal
               onRemove={() => handleRemove(item.id)}
-              onAdd={onUpdate} // 🔁 автоматичне оновлення після дій
+              onAdd={onUpdate}
             />
           </div>
         ))}
 
-        {/* ➕ Картка "Add New Wish" у вигляді RecommendationCard */}
         <div className="col-md-4">
           <div
             className="card h-100 shadow-sm custom-card d-flex flex-column justify-content-center align-items-center text-center"

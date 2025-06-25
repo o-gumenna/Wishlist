@@ -41,7 +41,7 @@ const SearchDropdown = ({ onAddWish }) => {
   return (
     <div className="dropdown">
       <button
-        className="btn border border-dark text-dark dropdown-toggle"
+        className="btn border border-dark text-dark dropdown-toggle pulse-hover"
         type="button"
         data-bs-toggle="dropdown"
         aria-expanded="false"

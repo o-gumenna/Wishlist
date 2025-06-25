@@ -4,6 +4,9 @@ import AddWishModal from "../src/components/AddWishModal";
 import LoginModal from "../src/components/LoginModal";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { notifyLoginRequired } from "../src/hooks/toastUtils";
+
+
 
 const MyWishlistPage = () => {
   const router = useRouter();
@@ -19,14 +22,14 @@ const MyWishlistPage = () => {
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     if (!isLoggedIn) {
-      alert("Будь ласка, увійди, щоб побачити свій вішліст 💌");
+      notifyLoginRequired();
       router.push("/");
     } else {
       loadWishes();
     }
   }, []);
 
-  // 👂 слухаємо кастомну подію для відкриття Add-модалки з кнопки
+
   useEffect(() => {
     const openAddHandler = () => setShowModal(true);
     document.addEventListener("open-add-modal", openAddHandler);

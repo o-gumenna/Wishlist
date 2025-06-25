@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import { notifyLoggedIn, notifyLoggedOut } from "../hooks/toastUtils";
+
 
 const LoginModal = ({ show, handleClose }) => {
   const [name, setName] = useState("");
@@ -18,6 +20,7 @@ const LoginModal = ({ show, handleClose }) => {
     localStorage.setItem("user", JSON.stringify(newUser));
     localStorage.setItem("isLoggedIn", "true");
     setUser(newUser);
+    notifyLoggedIn();
     handleClose();
   };
 
@@ -25,13 +28,14 @@ const LoginModal = ({ show, handleClose }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("isLoggedIn");
     setUser(null);
+    notifyLoggedOut();
     handleClose();
   };
 
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title className="w-100 text-center">Autorization</Modal.Title>
+        <Modal.Title className="w-100 text-center">Authentication</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -39,7 +43,7 @@ const LoginModal = ({ show, handleClose }) => {
           <div className="text-center">
             <p className="mb-1">Hi, <strong>{user.name}</strong></p>
             <p className="text-muted">{user.email}</p>
-            <Button variant="outline-danger" onClick={handleLogout}>
+            <Button variant="outline-secondary" onClick={handleLogout}>
               Leave
             </Button>
           </div>
@@ -76,7 +80,7 @@ const LoginModal = ({ show, handleClose }) => {
             </Form.Group>
 
             <div className="d-grid">
-              <Button type="submit" variant="primary">
+              <Button type="submit" variant="outline-primary">
                 Login
               </Button>
             </div>

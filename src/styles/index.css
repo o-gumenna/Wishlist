@@ -20,14 +20,14 @@ h1, h2, h3, h4 {
   padding: 5rem 0;
 }
 
-.btn-success {
+.btn-main {
   background-color: black;
   color: #f1eac6;
   border: none;
 }
 
 
-.btn-success:hover {
+.btn-main:hover {
   background-color: #f1eac6;
   color: #7b7d5a;
 }
@@ -39,7 +39,7 @@ h1, h2, h3, h4 {
 
 .btn-outline-primary:hover {
   background-color: #7b7d5a;
-  color: #f1eac6;
+  color: white;
   border: none;
 }
 
@@ -50,7 +50,7 @@ h1, h2, h3, h4 {
 
 .btn-outline-success:hover {
   background-color: black;
-  color: #f1eac6;
+  color: white;
   border: none;
 }
 
@@ -102,7 +102,6 @@ h1, h2, h3, h4 {
   padding: 0.6rem 1.2rem;
   font-weight: 500;
   border-radius: 8px;
-  transition: 0.3s ease;
 }
 
 .btn-wish:hover {
@@ -126,7 +125,7 @@ h1, h2, h3, h4 {
 
 .btn-wishlist-bottom:hover {
   background-color: #1d1d1d;
-  color: #fff;
+  color: #f1eac6;
 }
 
 .btn-delete {
@@ -140,3 +139,24 @@ h1, h2, h3, h4 {
   color: white;
   border: none;
 }
+
+.pulse-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pulse-hover:hover {
+  animation: pulse 0.6s ease;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+

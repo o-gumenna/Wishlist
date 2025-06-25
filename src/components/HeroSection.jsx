@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Button } from "react-bootstrap";
 import { notifyLoginRequired } from "../hooks/toastUtils";
-
+import { isLoggedIn } from "../hooks/auth";
 
 const HeroSection = ({ onAddWish }) => {
   return (
@@ -27,11 +27,10 @@ const HeroSection = ({ onAddWish }) => {
                   Dream, look for, save and make<br />your wish come true
                 </p>
                 <Button
-                  variant="success"
+                  className="btn-main"
                   size="lg"
                   onClick={() => {
-                    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-                    if (!isLoggedIn) {
+                    if (!isLoggedIn()) {
                       notifyLoginRequired();
                       return;
                     }

@@ -37,7 +37,7 @@ const RecommendationSection = () => {
         <h2 className="mb-4 text-center text-white">Gift Ideas for You</h2>
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {visibleGifts.map((gift) => (
-            <div key={gift.id} className="col">
+            <div key={gift.id} className="col pulse-hover">
               <RecommendationCard gift={gift} />
             </div>
           ))}

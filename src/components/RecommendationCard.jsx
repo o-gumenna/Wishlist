@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Modal, Button } from "react-bootstrap";
 import useWishlist from "../hooks/useWishlist";
-import { notifyAdded, notifyExists } from "../hooks/toastUtils";
+import { notifyAdded, notifyExists, notifyRemoved, notifyLoginRequired } from "../hooks/toastUtils";
+import { isLoggedIn } from "../hooks/auth";
 
 const RecommendationCard = ({
   gift,
@@ -28,6 +29,11 @@ const RecommendationCard = ({
   };
 
   const handleAddToWishlist = () => {
+    if (!isLoggedIn()) {
+      notifyLoginRequired();
+      return;
+    }
+
     if (!exists(gift)) {
       addWish(gift);
       notifyAdded();
@@ -37,8 +43,18 @@ const RecommendationCard = ({
     } else {
       notifyExists();
     }
+
     setShow(false);
   };
+
+
+  const handleRemoveFromWishlist = () => {
+    if (typeof onRemove === "function") {
+      onRemove();
+      notifyRemoved();
+    }
+  };
+
 
   return (
     <>
@@ -61,11 +77,10 @@ const RecommendationCard = ({
 
             {isPersonal ? (
               <Button
-                variant="outline-danger"
-                className="mt-auto"
-                onClick={onRemove}
+                className="btn-delete"
+                onClick={handleRemoveFromWishlist}
               >
-                Видалити з мого вішліста
+                Delete from my wishlist
               </Button>
             ) : (
               <Button
@@ -73,7 +88,7 @@ const RecommendationCard = ({
                 className="mt-auto"
                 onClick={handleAddToWishlist}
               >
-                + Add to Wishlist
+                + Add to my wishlist
               </Button>
             )}
           </div>
@@ -110,7 +125,7 @@ const RecommendationCard = ({
         {!isPersonal && (
           <Modal.Footer className="justify-content-center">
             <Button variant="outline-dark" onClick={handleAddToWishlist}>
-              Add to Wishlist
+              + Add to my wishlist
             </Button>
           </Modal.Footer>
         )}
