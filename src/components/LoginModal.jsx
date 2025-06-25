@@ -31,22 +31,22 @@ const LoginModal = ({ show, handleClose }) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Авторизація</Modal.Title>
+        <Modal.Title className="w-100 text-center">Autorization</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
         {user ? (
           <div className="text-center">
-            <p className="mb-1">🔐 Вітаємо, <strong>{user.name}</strong></p>
+            <p className="mb-1">Hi, <strong>{user.name}</strong></p>
             <p className="text-muted">{user.email}</p>
             <Button variant="outline-danger" onClick={handleLogout}>
-              Вийти
+              Leave
             </Button>
           </div>
         ) : (
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-              <Form.Label>Ім’я</Form.Label>
+              <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
                 value={name}
@@ -66,7 +66,7 @@ const LoginModal = ({ show, handleClose }) => {
             </Form.Group>
 
             <Form.Group className="mb-4">
-              <Form.Label>Пароль</Form.Label>
+              <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
                 value={password}
@@ -77,7 +77,7 @@ const LoginModal = ({ show, handleClose }) => {
 
             <div className="d-grid">
               <Button type="submit" variant="primary">
-                Увійти
+                Login
               </Button>
             </div>
           </Form>

@@ -4,8 +4,8 @@ import HeroSection from "../src/components/HeroSection";
 import RecommendationSection from "../src/components/RecommendationSection";
 import LoginModal from "../src/components/LoginModal";
 import AddWishModal from "../src/components/AddWishModal";
-
-
+import { notifyLoginRequired } from "../src/hooks/toastUtils";
+import { isLoggedIn } from "../src/hooks/auth";
 
 
 export default function HomePage() {
@@ -27,9 +27,8 @@ export default function HomePage() {
         <button
           className="btn btn-outline-dark btn-wishlist-bottom"
           onClick={() => {
-            const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-            if (!isLoggedIn) {
-              alert("Спочатку увійдіть у свій акаунт ✨");
+            if (!isLoggedIn()) {
+              notifyLoginRequired();
               return;
             }
             window.location.href = "/my-wishlist";

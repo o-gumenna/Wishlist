@@ -22,13 +22,13 @@ const RecommendationSection = () => {
   };
 
   useEffect(() => {
-    fetchGifts(); // первинне завантаження
+    fetchGifts();
 
     const interval = setInterval(() => {
-      fetchGifts(); // кожні 10 сек
+      fetchGifts();
     }, 10000);
 
-    return () => clearInterval(interval); // очистка при демонтажі
+    return () => clearInterval(interval);
   }, []);
 
   return (

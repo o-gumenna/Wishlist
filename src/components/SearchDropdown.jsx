@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import RecommendationCard from "./RecommendationCard";
+import useWishlist from "../hooks/useWishlist";
+import { notifyAdded, notifyExists, notifyLoginRequired } from "../hooks/toastUtils";
+import { isLoggedIn } from "../hooks/auth";
+
 
 const SearchDropdown = ({ onAddWish }) => {
   const [items, setItems] = useState([]);
   const [show, setShow] = useState(false);
   const [selectedGift, setSelectedGift] = useState(null);
+  const { addWish, exists } = useWishlist();
 
   useEffect(() => {
     fetch("http://localhost:9999/gifts")
@@ -15,23 +20,22 @@ const SearchDropdown = ({ onAddWish }) => {
 
   const handlePreview = (gift) => {
     setSelectedGift(gift);
-    setShow(true);
   };
 
   const handleAdd = (gift) => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    if (!isLoggedIn) {
-      alert("Будь ласка, увійди, щоб зберігати бажання 💫");
-      return;
+    if (!isLoggedIn()) {
+    notifyLoginRequired();
+    return;
+  }
+
+    if (!exists(gift)) {
+      addWish(gift);
+      notifyAdded();
+    } else {
+      notifyExists();
     }
-    const saved = JSON.parse(localStorage.getItem("wishlist")) || [];
-    const exists = saved.some((item) => item.id === gift.id);
-    
-    if (!exists) {
-      const updated = [...saved, gift];
-      localStorage.setItem("wishlist", JSON.stringify(updated));
-    }
-    console.log("Added to your wishlist:", gift.title);
+
+    notifyAdded;
   };
 
   return (
@@ -42,7 +46,7 @@ const SearchDropdown = ({ onAddWish }) => {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        Recommendstions
+        Recommendations
       </button>
 
       <ul
@@ -74,7 +78,7 @@ const SearchDropdown = ({ onAddWish }) => {
         ))}
 
         {items.length === 0 && (
-          <li className="text-muted px-2">Немає доступних ідей</li>
+          <li className="text-muted px-2">No ideas</li>
         )}
 
         <li className="border-top mt-3 pt-2">
@@ -88,18 +92,16 @@ const SearchDropdown = ({ onAddWish }) => {
         </li>
       </ul>
 
-      <Modal show={show} onHide={() => setShow(false)} centered>
-        {selectedGift && (
-          <>
-            <Modal.Header closeButton>
-              <Modal.Title>{selectedGift.title}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <RecommendationCard gift={selectedGift} />
-            </Modal.Body>
-          </>
-        )}
-      </Modal>
+      {selectedGift && (
+        <RecommendationCard
+          key={selectedGift.id} // 🔥 ВАЖЛИВО
+          gift={selectedGift}
+          autoOpen
+          onAdd={() => setSelectedGift(null)}
+          onRemove={() => setSelectedGift(null)}
+        />
+      )}
+
     </div>
   );
 };

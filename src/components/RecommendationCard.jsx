@@ -1,9 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Modal, Button } from "react-bootstrap";
+import useWishlist from "../hooks/useWishlist";
+import { notifyAdded, notifyExists } from "../hooks/toastUtils";
 
-const RecommendationCard = ({ gift, isPersonal = false, onRemove }) => {
+const RecommendationCard = ({
+  gift,
+  isPersonal = false,
+  onRemove,
+  onAdd,
+  autoOpen = false,
+}) => {
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (autoOpen) {
+      setShow(true);
+    }
+  }, [autoOpen]);
+
+  const { addWish, exists } = useWishlist();
 
   const openModal = (e) => {
     if (e.target.tagName.toLowerCase() !== "button") {
@@ -12,48 +28,57 @@ const RecommendationCard = ({ gift, isPersonal = false, onRemove }) => {
   };
 
   const handleAddToWishlist = () => {
-    const existing = JSON.parse(localStorage.getItem("wishlist")) || [];
-    const alreadyExists = existing.some((item) => item.id === gift.id);
-    if (!alreadyExists) {
-      const updated = [...existing, gift];
-      localStorage.setItem("wishlist", JSON.stringify(updated));
+    if (!exists(gift)) {
+      addWish(gift);
+      notifyAdded();
+      if (typeof onAdd === "function") {
+        onAdd();
+      }
+    } else {
+      notifyExists();
     }
     setShow(false);
   };
 
   return (
     <>
-      <div className="card h-100 shadow-sm custom-card" role="button" onClick={openModal}>
-        <Image
-          src={gift.image}
-          alt={gift.title}
-          width={400}
-          height={250}
-          className="card-img-top object-fit-cover rounded-top"
-        />
-        <div className="card-body d-flex flex-column">
-          <h5 className="card-title">{gift.title}</h5>
-          <p className="card-text fw-bold">{gift.price}</p>
+      {!autoOpen && (
+        <div
+          className="card h-100 shadow-sm custom-card"
+          role="button"
+          onClick={openModal}
+        >
+          <Image
+            src={gift.image}
+            alt={gift.title}
+            width={400}
+            height={250}
+            className="card-img-top object-fit-cover rounded-top"
+          />
+          <div className="card-body d-flex flex-column">
+            <h5 className="card-title">{gift.title}</h5>
+            <p className="card-text fw-bold">{gift.price}</p>
 
-          {isPersonal ? (
-            <Button
-              variant="outline-danger"
-              className="mt-auto"
-              onClick={onRemove}
-            >
-              Видалити з мого вішліста
-            </Button>
-          ) : (
-            <Button
-              variant="outline-primary"
-              className="mt-auto"
-              onClick={handleAddToWishlist}
-            >
-              + Add to Wishlist
-            </Button>
-          )}
+            {isPersonal ? (
+              <Button
+                variant="outline-danger"
+                className="mt-auto"
+                onClick={onRemove}
+              >
+                Видалити з мого вішліста
+              </Button>
+            ) : (
+              <Button
+                variant="outline-primary"
+                className="mt-auto"
+                onClick={handleAddToWishlist}
+              >
+                + Add to Wishlist
+              </Button>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       <Modal show={show} onHide={() => setShow(false)} centered>
         <Modal.Header closeButton>
@@ -82,7 +107,6 @@ const RecommendationCard = ({ gift, isPersonal = false, onRemove }) => {
             </div>
           )}
         </Modal.Body>
-
         {!isPersonal && (
           <Modal.Footer className="justify-content-center">
             <Button variant="outline-dark" onClick={handleAddToWishlist}>

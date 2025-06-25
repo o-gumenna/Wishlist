@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
+import useWishlist from "../hooks/useWishlist";
+import { notifyLoginRequired, notifyFormError, notifyAdded } from "../hooks/toastUtils";
+import { isLoggedIn } from "../hooks/auth";
+
+
 
 const AddWishModal = ({ show, onClose, onAddWish }) => {
   const [title, setTitle] = useState("");
@@ -8,6 +13,8 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
   const [price, setPrice] = useState("");
+
+  const { addWish } = useWishlist();
 
   const resetForm = () => {
     setTitle("");
@@ -20,14 +27,13 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    if (!isLoggedIn) {
-      alert("Будь ласка, увійди, щоб додати бажання ✨");
+    if (!isLoggedIn()) {
+      notifyLoginRequired();
       return;
     }
 
     if (!title.trim()) {
-      alert("Назва обовʼязкова!");
+      notifyFormError();
       return;
     }
 
@@ -41,7 +47,13 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
       isCustom: true
     };
 
-    onAddWish(newWish);
+    addWish(newWish);  
+    notifyAdded();      
+
+    if (typeof onAddWish === "function") {
+      onAddWish(newWish);
+    }
+
     resetForm();
     onClose();
   };

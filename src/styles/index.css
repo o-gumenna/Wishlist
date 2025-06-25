@@ -9,20 +9,17 @@ body {
 }
 
 
-/* Заголовки — декоративний шрифт */
 h1, h2, h3, h4 {
   font-family: 'Josefin Sans', sans-serif;
   color: black;
   letter-spacing: 0.5px;
 }
 
-/* Hero секція */
 .hero-section {
   background-color: #7b7d5a;
   padding: 5rem 0;
 }
 
-/* Кнопки */
 .btn-success {
   background-color: black;
   color: #f1eac6;
@@ -57,9 +54,6 @@ h1, h2, h3, h4 {
   border: none;
 }
 
-
-
-/* "Add New Wish" Card */
 .add-wish-card {
   background-color: #f1eac6;
   border: 2px dashed #7b7d5a;
@@ -133,5 +127,16 @@ h1, h2, h3, h4 {
 .btn-wishlist-bottom:hover {
   background-color: #1d1d1d;
   color: #fff;
-  transition: 0.3s ease;
+}
+
+.btn-delete {
+  background-color: white;
+  color: #7b7d5a;
+  border: 1px solid #7b7d5a;
+}
+
+.btn-delete:hover {
+  background-color: #7b7d5a;
+  color: white;
+  border: none;
 }

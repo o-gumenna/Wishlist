@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { Button } from "react-bootstrap";
+import { notifyLoginRequired } from "../hooks/toastUtils";
+
 
 const HeroSection = ({ onAddWish }) => {
   return (
@@ -7,11 +9,9 @@ const HeroSection = ({ onAddWish }) => {
       <div className="container">
         <div className="row align-items-stretch">
           
-          {/* Ліва колонка */}
           <div className="col-md-6 mb-4 mb-md-0">
             <div className="d-flex flex-column justify-content-between h-100">
               
-              {/* Заголовок */}
               <div>
                 <h2
                   className="fw-bold mb-3 display-2 text-start"
@@ -22,7 +22,6 @@ const HeroSection = ({ onAddWish }) => {
                 </h2>
               </div>
 
-              {/* Підзаголовок і кнопка */}
               <div>
                 <p className="fs-2 mb-4">
                   Dream, look for, save and make<br />your wish come true
@@ -33,7 +32,7 @@ const HeroSection = ({ onAddWish }) => {
                   onClick={() => {
                     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
                     if (!isLoggedIn) {
-                      alert("Login to save a wish");
+                      notifyLoginRequired();
                       return;
                     }
                     onAddWish();
@@ -46,7 +45,6 @@ const HeroSection = ({ onAddWish }) => {
             </div>
           </div>
 
-          {/* Зображення */}
           <div className="col-md-6 text-center">
             <Image
               src="/images/wishlist.png"

@@ -10,7 +10,7 @@ const Header = () => {
         className="btn btn-outline-secondary"
         onClick={() => setShowLogin(true)}
       >
-        👤 Login
+        Login
       </button>
 
       <LoginModal show={showLogin} handleClose={() => setShowLogin(false)} />
