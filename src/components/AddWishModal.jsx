@@ -12,6 +12,7 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
   const [price, setPrice] = useState("");
+  const [showLinkField, setShowLinkField] = useState(false);
 
   const { addWish } = useWishlist();
 
@@ -22,6 +23,7 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
     setDescription("");
     setLink("");
     setPrice("");
+    setShowLinkField(false);
   };
 
   const handleSubmit = (e) => {
@@ -44,7 +46,7 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
       description,
       price: price ? `${price} ₴` : "—",
       link,
-      isCustom: true
+      isCustom: true,
     };
 
     addWish(newWish);
@@ -62,8 +64,11 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
     const file = e.target.files[0];
     if (file) {
       setFileName(file.name);
-      const previewUrl = URL.createObjectURL(file);
-      setImage(previewUrl);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
     } else {
       setFileName("No file chosen");
       setImage("");
@@ -81,7 +86,7 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
             <Form.Label>Name *</Form.Label>
             <Form.Control
               type="text"
-              placeholder="For example, Laptop Asus Zenbook"
+              placeholder="For example, Laptop"
               value={title}
               required
               onChange={(e) => setTitle(e.target.value)}
@@ -91,10 +96,12 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
           <Form.Group className="mb-3">
             <Form.Label>Picture</Form.Label>
             <div className="d-flex align-items-center">
-              <label htmlFor="customFileUpload" className="btn btn-outline-primary me-3 mb-0">
+              <label
+                htmlFor="customFileUpload"
+                className="btn btn-outline-primary me-3 mb-0"
+              >
                 Choose file
               </label>
-              <span className="text-muted">{fileName}</span>
               <Form.Control
                 type="file"
                 id="customFileUpload"
@@ -102,18 +109,9 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
                 onChange={handleFileChange}
                 style={{ display: "none" }}
               />
+              <span className="text-muted">{fileName}</span>
             </div>
           </Form.Group>
-
-          {image && (
-            <div className="mb-3 text-center">
-              <img
-                src={image}
-                alt="Preview"
-                style={{ maxWidth: "100%", height: "auto", borderRadius: 8 }}
-              />
-            </div>
-          )}
 
           <Form.Group className="mb-3">
             <Form.Label>Description</Form.Label>
@@ -127,16 +125,6 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Link</Form.Label>
-            <Form.Control
-              type="url"
-              placeholder="https://example.com"
-              value={link}
-              onChange={(e) => setLink(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
             <Form.Label>Price</Form.Label>
             <Form.Control
               type="number"
@@ -145,6 +133,30 @@ const AddWishModal = ({ show, onClose, onAddWish }) => {
               onChange={(e) => setPrice(e.target.value)}
             />
           </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Check
+              type="checkbox"
+              label="Add a link to the item"
+              checked={showLinkField}
+              onChange={(e) => {
+                setShowLinkField(e.target.checked);
+                if (!e.target.checked) setLink("");
+              }}
+            />
+          </Form.Group>
+
+          {showLinkField && (
+            <Form.Group className="mb-3">
+              <Form.Label>Link</Form.Label>
+              <Form.Control
+                type="url"
+                placeholder="https://example.com"
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+              />
+            </Form.Group>
+          )}
 
           <div className="d-grid">
             <Button className="btn-wish" type="submit">

@@ -85,7 +85,6 @@ const RecommendationCard = ({
             ) : (
               <Button
                 variant="outline-primary"
-                className="mt-auto"
                 onClick={handleAddToWishlist}
               >
                 + Add to my wishlist

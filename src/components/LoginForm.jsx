@@ -1,18 +1,19 @@
 import { useState } from "react";
 import LoginModal from "./LoginModal";
+import { Button } from "react-bootstrap";
+
 
 const Header = () => {
   const [showLogin, setShowLogin] = useState(false);
 
   return (
     <>
-      <button
+      <Button
         variant="outline-primary"
         onClick={() => setShowLogin(true)}
       >
         Login
-      </button>
-
+      </Button>
       <LoginModal show={showLogin} handleClose={() => setShowLogin(false)} />
     </>
   );

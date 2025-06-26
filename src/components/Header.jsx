@@ -5,16 +5,16 @@ import SearchDropdown from "./SearchDropdown";
 const Header = ({ onLoginClick, onAddWish, onUpdate }) => {
   return (
     <header>
-      <nav className="navbar navbar-expand-lg header-bg border-bottom px-3">
+      <nav className="navbar navbar-expand-lg px-3">
         <div className="container-fluid">
 
-          <Link href="/" className="navbar-brand site-logo pulse-hover">
+          <Link href="/" className="navbar-brand pulse-hover">
             WishForest
           </Link>
 
           <div className="d-flex align-items-center gap-3 ms-auto">
 
-            <Link href="/my-wishlist" className="btn border border-dark text-dark pulse-hover">
+            <Link href="/my-wishlist" className="btn border-dark text-dark pulse-hover">
               My Wishlist
             </Link>
 
@@ -23,7 +23,7 @@ const Header = ({ onLoginClick, onAddWish, onUpdate }) => {
               onUpdate={onUpdate}
             />
 
-            <button className="btn border border-dark text-dark pulse-hover" onClick={onLoginClick}>
+            <button className="btn border-dark text-dark pulse-hover" onClick={onLoginClick}>
               <FaUser />
             </button>
 

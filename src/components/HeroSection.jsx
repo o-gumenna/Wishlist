@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Button } from "react-bootstrap";
 import { notifyLoginRequired } from "../hooks/toastUtils";
 import { isLoggedIn } from "../hooks/auth";
 
@@ -26,9 +25,8 @@ const HeroSection = ({ onAddWish }) => {
                 <p className="fs-2 mb-4">
                   Dream, look for, save and make<br />your wish come true
                 </p>
-                <Button
-                  className="btn-main"
-                  size="lg"
+                <button
+                  className="btn btn-main btn-lg"
                   onClick={() => {
                     if (!isLoggedIn()) {
                       notifyLoginRequired();
@@ -38,7 +36,7 @@ const HeroSection = ({ onAddWish }) => {
                   }}
                 >
                   save a new wish
-                </Button>
+                </button>
               </div>
 
             </div>

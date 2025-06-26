@@ -70,13 +70,13 @@ h1, h2, h3, h4 {
   background-color: #7b7d5a;
 }
 
-.header-bg {
-  background-color: #f1eac6 !important;
+.navbar {
+  background-color: #f1eac6;
 }
 
-.site-logo {
+.navbar-brand {
   font-family: 'Lobster', cursive;
-  color: #000;
+  color: black;
   font-size: 3rem;
   line-height: 1.5;           
   padding-top: 0.1rem;    

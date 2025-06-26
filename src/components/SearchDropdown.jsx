@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button} from "react-bootstrap";
 import RecommendationCard from "./RecommendationCard";
 import useWishlist from "../hooks/useWishlist";
 import { notifyAdded, notifyExists, notifyLoginRequired } from "../hooks/toastUtils";
@@ -30,7 +30,7 @@ const SearchDropdown = ({ onAddOwnWish, onUpdate }) => {
       addWish(gift);
       notifyAdded();
       if (typeof onUpdate === "function") {
-        onUpdate(); // ✅ оновлюємо список побажань
+        onUpdate();
       }
     } else {
       notifyExists();
@@ -50,7 +50,7 @@ const SearchDropdown = ({ onAddOwnWish, onUpdate }) => {
 
       <ul
         className="dropdown-menu dropdown-menu-end p-3 shadow"
-        style={{ width: "500px", maxHeight: "400px", overflowY: "auto" }}
+        style={{ width: "500px", maxHeight: "350px", overflowY: "auto" }}
       >
         {items.map((gift) => (
           <li key={gift.id} className="mb-2">
@@ -84,7 +84,7 @@ const SearchDropdown = ({ onAddOwnWish, onUpdate }) => {
           <div
             className="d-flex justify-content-center text-dark fw-semibold"
             role="button"
-            onClick={onAddOwnWish} // ✅ відкриває модальне вікно вручну
+            onClick={onAddOwnWish}
           >
             Add your own item
           </div>
@@ -100,6 +100,7 @@ const SearchDropdown = ({ onAddOwnWish, onUpdate }) => {
           onRemove={() => setSelectedGift(null)}
         />
       )}
+      
     </div>
   );
 };
